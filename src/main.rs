@@ -50,7 +50,7 @@ struct Opts {
     #[clap(
         short = 'c',
         long = "columns",
-        about = "Sets width of text file in columns",
+        about = "Sets width of text in columns",
         takes_value = true,
         value_name = "# cols",
         default_value = "80"
@@ -69,13 +69,13 @@ struct Opts {
     #[clap(
         short = 'o',
         long = "output",
-        about = "Path to output file; input file is overwritten if not specified",
+        about = "Path to output file; overwrites input file if not specified",
         takes_value = true,
         value_name = "path"
     )]
     output: Option<String>,
     #[clap(
-        about = "Path to file to format",
+        about = "Path to input file",
         value_name = "INPUT",
         required = true
     )]

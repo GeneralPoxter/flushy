@@ -1,5 +1,5 @@
 # flushy
-Rust crate for aligning/flushing text files
+Rust program for aligning/flushing text files
 
 ## Installation
 Install the Rust toolchain and run:
@@ -26,5 +26,5 @@ OPTIONS:
     -c, --columns <# cols>    Sets width of text file in columns [default: 80]
     -m, --mode <name>         Sets align/flush mode [default: left] [possible values: left, right,
                               center, flush, flush-hyphen]
-    -o, --output <path>       Path to output file; input file is overwritten if not specified
+    -o, --output <path>       Path to output file; input file is overwritten if not specified``
 ```
