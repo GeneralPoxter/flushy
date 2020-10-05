@@ -28,3 +28,4 @@ OPTIONS:
                               center, flush, flush-hyphen]
     -o, --output <path>       Path to output file; input file is overwritten if not specified
 ```
+Warning: this process is not reversible!
