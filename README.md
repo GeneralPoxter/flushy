@@ -2,13 +2,13 @@
 Rust crate for aligning/flushing text files
 
 ## Installation
-Install the Rust toolchain and run
+Install the Rust toolchain and run:
 ```sh
 git clone https://github.com/GeneralPoxter/flushy.git
 cd flushy
 cargo build --release
 ```
-`flushy` binary is located `[path to flushy/target/release/`.  
+`flushy` binary is located `[path to flushy]/target/release/`.  
 flushy does not support Windows.
 
 ## Usage
