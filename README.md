@@ -8,8 +8,9 @@ git clone https://github.com/GeneralPoxter/flushy.git
 cd flushy
 cargo build --release
 ```
-`flushy` binary is located `[path to flushy]/target/release/`.  
-flushy does not support Windows.
+`flushy` binary is located `[path to flushy]/target/release/`.
+
+flushy does not support Windows. Windows users should install Linux.
 
 ## Usage
 ```
