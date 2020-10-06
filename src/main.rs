@@ -80,7 +80,11 @@ struct Opts {
         about = "Breaks on double new lines if specified"
     )]
     double: bool,
-    #[clap(about = "Path to input file", value_name = "INPUT", required = true)]
+    #[clap(
+        about = "Path to input file",
+        value_name = "INPUT",
+        required = true
+    )]
     input: String,
 }
 

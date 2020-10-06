@@ -16,16 +16,19 @@ flushy does not support Windows.
 flushy [FLAGS] [OPTIONS] <INPUT>
 
 ARGS:
-    <INPUT>    Path to file to format
+    <INPUT>    Path to input file
 
 FLAGS:
+    -d, --double     Breaks on double new lines if specified
     -h, --help       Prints help information
     -V, --version    Prints version information
 
 OPTIONS:
-    -c, --columns <# cols>    Sets width of text file in columns [default: 80]
+    -c, --columns <# cols>    Sets width of text in columns [default: 80]
     -m, --mode <name>         Sets align/flush mode [default: left] [possible values: left, right,
                               center, flush, flush-hyphen]
-    -o, --output <path>       Path to output file; input file is overwritten if not specified
+    -o, --output <path>       Path to output file; overwrites input file if not specified
 ```
-Warning: this process is not reversible!
+
+**Warning: this process is not reversible!**
+It is recommended that an output file be specified if input file is not backed up.
