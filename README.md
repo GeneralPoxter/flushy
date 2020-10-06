@@ -30,5 +30,5 @@ OPTIONS:
     -o, --output <path>       Path to output file; overwrites input file if not specified
 ```
 
-**Warning: this process is not reversible!**
+**Warning: this process is not reversible!**  
 It is recommended that an output file be specified if input file is not backed up.
