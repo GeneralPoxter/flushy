@@ -1,10 +1,10 @@
 use clap::Clap;
+use std::convert::Infallible;
 use std::format;
 use std::fs;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
 use std::str::FromStr;
-use std::convert::Infallible;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Align {
@@ -77,14 +77,10 @@ struct Opts {
     #[clap(
         short = 'd',
         long = "double",
-        about = "Breaks on double new lines if specified",
+        about = "Breaks on double new lines if specified"
     )]
     double: bool,
-    #[clap(
-        about = "Path to input file",
-        value_name = "INPUT",
-        required = true
-    )]
+    #[clap(about = "Path to input file", value_name = "INPUT", required = true)]
     input: String,
 }
 
