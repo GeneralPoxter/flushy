@@ -75,6 +75,12 @@ struct Opts {
     )]
     output: Option<String>,
     #[clap(
+        short = 'd',
+        long = "double",
+        about = "Breaks on double new lines if specified",
+    )]
+    double: bool,
+    #[clap(
         about = "Path to input file",
         value_name = "INPUT",
         required = true
@@ -125,9 +131,9 @@ fn format_line(line: &str, col: usize, last_space: usize, mode: Mode) -> String 
                 }
 
                 Flush::FlushHyphen => {
-                    if length(line) == col && last_space != col - 1 {
+                    if length(line) == col && line.chars().last().unwrap().is_alphabetic() {
                         tmp = tmp[..col - 1].to_owned();
-                        if last_space != col - 2 {
+                        if line.chars().nth(col - 2).unwrap().is_alphabetic() {
                             tmp.push_str("-");
                         }
                     }
@@ -174,12 +180,13 @@ fn format(line: &str, col: usize, mode: Mode) -> String {
                     }
 
                     Flush::FlushHyphen => {
-                        if last_space == col - 1 {
+                        let last_char = cur.chars().last().unwrap();
+                        if last_char.is_alphabetic() {
+                            cur = last_char.to_string();
+                            curlen = 1;
+                        } else {
                             cur = String::new();
                             curlen = 0;
-                        } else {
-                            cur = cur.chars().last().unwrap().to_string();
-                            curlen = 1;
                         }
                     }
                 },
@@ -189,8 +196,10 @@ fn format(line: &str, col: usize, mode: Mode) -> String {
         }
     }
 
-    last_space = curlen;
-    out.push(format_line(&cur, col, last_space, mode));
+    if length(&cur) > 0 {
+        last_space = curlen;
+        out.push(format_line(&cur, col, last_space, mode));
+    }
 
     return out.join("\n");
 }
@@ -203,9 +212,27 @@ fn main() {
     let reader =
         BufReader::new(File::open(&opts.input).expect(&format!("Couldn't read {}", opts.input)));
 
+    let mut line_cum = Vec::<String>::new();
+
     for line in reader.lines() {
-        let line_format = format(&line.unwrap(), opts.col, mode);
-        write!(tmp, "{}", line_format).expect("Couldn't write to /tmp/flushy.txt");
+        let line_parse = line.unwrap();
+
+        if opts.double {
+            line_cum.push(line_parse.clone());
+            if length(&line_parse) == 0 {
+                writeln!(tmp, "{}\n", format(&line_cum.join(" "), opts.col, mode))
+                    .expect("Couldn't write to /tmp/flushy.txt");
+                line_cum = Vec::<String>::new();
+            }
+        } else {
+            let line_format = format(&line_parse, opts.col, mode);
+            writeln!(tmp, "{}", line_format).expect("Couldn't write to /tmp/flushy.txt");
+        }
+    }
+
+    if line_cum.len() > 0 {
+        writeln!(tmp, "{}", format(&line_cum.join(" "), opts.col, mode))
+            .expect("Couldn't write to /tmp/flushy.txt");
     }
 
     let out = opts.output.unwrap_or(opts.input);
