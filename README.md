@@ -4,11 +4,8 @@ Rust program for aligning/flushing text files
 ## Installation
 Install the Rust toolchain and run:
 ```sh
-git clone https://github.com/GeneralPoxter/flushy.git
-cd flushy
-cargo build --release
+cargo install --git https://github.com/GeneralPoxter/flushy.git
 ```
-`flushy` binary is located `[path to flushy]/target/release/`.
 
 flushy does not support Windows. Windows users should install Linux.
 
