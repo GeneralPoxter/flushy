@@ -67,14 +67,6 @@ struct Opts {
     )]
     mode: String,
     #[clap(
-        short = 'o',
-        long = "output",
-        about = "Path to output file; overwrites input file if not specified",
-        takes_value = true,
-        value_name = "path"
-    )]
-    output: Option<String>,
-    #[clap(
         short = 'd',
         long = "double",
         about = "Breaks on double new lines if specified"
@@ -86,6 +78,11 @@ struct Opts {
         required = true
     )]
     input: String,
+    #[clap(
+        about = "Path to output file; overwrites input file if not specified",
+        value_name = "OUTPUT",
+    )]
+    output: Option<String>
 }
 
 fn length(x: &str) -> usize {
@@ -233,6 +230,7 @@ fn main() {
     if line_cum.len() > 0 {
         writeln!(tmp, "{}", format(&line_cum.join(" "), opts.col, mode))
             .expect("Couldn't write to /tmp/flushy.txt");
+
     }
 
     let out = opts.output.unwrap_or(opts.input);
